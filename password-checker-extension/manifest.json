@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "Password Strength Checker",
+  "version": "1.0",
+  "description": "Check password strength locally with entropy, pattern detection, and improvement tips.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Password Strength Checker",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Password Strength Checker</title>
+  <link rel="stylesheet" href="popup.css">
+  <script src="strength.js" defer></script>
+  <script src="popup.js" defer></script>
+</head>
+<body>
+  <main class="popup-shell">
+    <header class="popup-header">
+      <div class="brand-mark" aria-hidden="true">P</div>
+      <div>
+        <p class="eyebrow">Private by design</p>
+        <h1>Password Strength Checker</h1>
+      </div>
+    </header>
+
+    <section class="checker-panel" aria-labelledby="checker-heading">
+      <h2 id="checker-heading" class="sr-only">Password checker</h2>
+      <label for="password-input">Enter a password</label>
+      <div class="password-row">
+        <input id="password-input" name="password" type="password" autocomplete="off" spellcheck="false" aria-describedby="privacy-note">
+        <button id="toggle-password" class="icon-button" type="button" aria-label="Show password">Show</button>
+      </div>
+      <div class="strength-heading"><span id="strength-label">Very Weak</span><span id="strength-score">0/4</span></div>
+      <div class="strength-bar" role="progressbar" aria-label="Password strength" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0"><span id="strength-fill"></span></div>
+      <p id="strength-message" class="muted">Type a password to check it locally.</p>
+
+      <div class="stats-grid" aria-label="Password analysis">
+        <div><span class="stat-label">Length</span><strong id="length-value">0</strong></div>
+        <div><span class="stat-label">Character set</span><strong id="charset-value">0</strong></div>
+        <div><span class="stat-label">Entropy</span><strong id="entropy-value">0 bits</strong></div>
+      </div>
+      <p class="brute-force"><strong>Offline brute-force estimate</strong><span id="time-value">-</span></p>
+    </section>
+
+    <section class="checklist-panel" aria-labelledby="checklist-heading">
+      <div class="section-title-row"><h2 id="checklist-heading">Strength checklist</h2><span id="checklist-count">0/4</span></div>
+      <ul class="checklist">
+        <li id="check-length"><span class="check-icon" aria-hidden="true">&#10003;</span><span>At least 12 characters</span></li>
+        <li id="check-uppercase"><span class="check-icon" aria-hidden="true">&#10003;</span><span>Uppercase letter</span></li>
+        <li id="check-lowercase"><span class="check-icon" aria-hidden="true">&#10003;</span><span>Lowercase letter</span></li>
+        <li id="check-digit"><span class="check-icon" aria-hidden="true">&#10003;</span><span>Digit</span></li>
+        <li id="check-symbol"><span class="check-icon" aria-hidden="true">&#10003;</span><span>Symbol</span></li>
+      </ul>
+    </section>
+
+    <section class="actions-panel" aria-label="Password actions">
+      <button id="generate-password" class="primary-button" type="button">Generate strong password</button>
+      <button id="copy-password" class="secondary-button" type="button" disabled>Copy</button>
+      <span id="copy-status" class="copy-status" role="status" aria-live="polite"></span>
+    </section>
+
+    <section class="tips-panel" aria-labelledby="tips-heading">
+      <h2 id="tips-heading">Ways to improve</h2>
+      <ul id="tips-list"><li>Use a long, unique password with several character types.</li></ul>
+    </section>
+
+    <p id="privacy-note" class="privacy-note">Your password is analyzed only in this popup. It is never stored, logged, or sent anywhere.</p>
+  </main>
+</body>
+</html>
