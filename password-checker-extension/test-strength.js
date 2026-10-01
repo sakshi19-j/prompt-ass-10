@@ -1,5 +1,5 @@
 const assert = require('node:assert/strict');
-const { analyzePassword } = require('./strength.js');
+const { analyzePassword, formatBruteForceTime } = require('./strength.js');
 
 const samples = [
   { name: 'empty', password: '', check: result => result.score === 0 && result.entropy === 0 },
@@ -9,7 +9,9 @@ const samples = [
   { name: 'sixteen-character random', password: 'G7!qL2@vP9#xR4$m', check: result => result.length === 16 && result.score >= 3 },
   { name: 'repeated character', password: 'aaaaaaaaaaaa', check: result => result.hasPattern && result.score <= 1 },
   { name: 'sequence pattern', password: 'abcdEFGH1234', check: result => result.hasPattern },
-  { name: 'strong varied password', password: 'vN8$kP2!rT6@xQ9#', check: result => result.characterSetSize === 94 && result.label === 'Very Strong' }
+  { name: 'strong varied password', password: 'vN8$kP2!rT6@xQ9#', check: result => result.characterSetSize === 94 && result.label === 'Very Strong' },
+  { name: 'trillion formatting', password: '', check: () => formatBruteForceTime(1000000000000 * 365 * 24 * 60 * 60) === '1 trillion years' },
+  { name: 'quadrillion formatting', password: '', check: () => formatBruteForceTime(1.2e15 * 365 * 24 * 60 * 60) === '1.2 quadrillion years' }
 ];
 
 let failures = 0;

@@ -61,7 +61,16 @@
     if (number < 1000000) return Math.round(number / 1000) + ' thousand';
     if (number < 1000000000) return Math.round(number / 1000000) + ' million';
     if (number < 1000000000000) return Math.round(number / 1000000000) + ' billion';
-    return number.toExponential(1);
+    if (number < 1000000000000000) return formatUnit(number, 1000000000000, 'trillion');
+    if (number < 1000000000000000000) return formatUnit(number, 1000000000000000, 'quadrillion');
+    if (number < 1000000000000000000000) return formatUnit(number, 1000000000000000000, 'quintillion');
+    if (number < 1000000000000000000000000) return formatUnit(number, 1000000000000000000000, 'sextillion');
+    return 'more than a sextillion';
+  }
+
+  function formatUnit(number, unitValue, unitName) {
+    var value = Math.round((number / unitValue) * 10) / 10;
+    return value + ' ' + unitName;
   }
 
   function getTips(password, result) {

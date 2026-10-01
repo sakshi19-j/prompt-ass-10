@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
     entropyValue.textContent = result.entropy.toFixed(1) + ' bits';
     timeValue.textContent = result.bruteForceTime;
     checklistCount.textContent = complete + '/5';
-    strengthMessage.textContent = result.length === 0 ? 'Type a password to check it locally.' : result.isCommon ? 'This password appears in a common weak-password list.' : result.hasPattern ? 'This password contains an obvious pattern.' : 'This estimate assumes a random password and an offline attack.';
+    strengthMessage.textContent = result.length === 0 ? 'Type a password to check it locally.' : result.isCommon || result.hasPattern ? 'Random-password estimate only; known or patterned passwords may be guessed much sooner.' : 'Random-password estimate only; real passwords may be less random than this model assumes.';
     tipsList.innerHTML = result.tips.map(function (tip) { return '<li>' + tip + '</li>'; }).join('');
   }
 
