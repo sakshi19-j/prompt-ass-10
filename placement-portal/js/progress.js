@@ -9,13 +9,12 @@ var preparationGroups = [
 document.addEventListener('DOMContentLoaded', function () {
   var checklist = document.getElementById('checklist');
   if (!checklist) return;
-  var storageKey = 'placeprep-checklist';
-  var saved = JSON.parse(localStorage.getItem(storageKey) || '{}');
+  var saved = JSON.parse(localStorage.getItem(checklistStorageKey) || '{}');
 
   // Renders grouped checklist items using saved completion states.
   function renderChecklist() {
     checklist.innerHTML = preparationGroups.map(function (group, groupIndex) { return '<section class="checklist-group card"><h2>' + group.topic + '</h2><div class="task-list">' + group.tasks.map(function (task, taskIndex) { var id = 'task-' + groupIndex + '-' + taskIndex; var checked = saved[id] ? ' checked' : ''; return '<label class="task-item" for="' + id + '"><input id="' + id + '" type="checkbox" data-task="' + id + '"' + checked + '><span class="custom-check" aria-hidden="true">&#10003;</span><span>' + task + '</span></label>'; }).join('') + '</div></section>'; }).join('');
-    checklist.querySelectorAll('input[type="checkbox"]').forEach(function (input) { input.addEventListener('change', function () { saved[input.dataset.task] = input.checked; localStorage.setItem(storageKey, JSON.stringify(saved)); updateProgress(); }); });
+    checklist.querySelectorAll('input[type="checkbox"]').forEach(function (input) { input.addEventListener('change', function () { saved[input.dataset.task] = input.checked; localStorage.setItem(checklistStorageKey, JSON.stringify(saved)); updateProgress(); }); });
     updateProgress();
   }
 
@@ -29,6 +28,6 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('progress-bar').style.width = percentage + '%';
   }
 
-  document.getElementById('reset-progress').addEventListener('click', function () { saved = {}; localStorage.removeItem(storageKey); renderChecklist(); });
+  document.getElementById('reset-progress').addEventListener('click', function () { saved = {}; localStorage.removeItem(checklistStorageKey); renderChecklist(); });
   renderChecklist();
 });
